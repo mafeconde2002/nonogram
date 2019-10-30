@@ -1,0 +1,201 @@
+# Visualizacion de nonograma 5x5 a partir de
+# una lista de literales. Cada literal representa una casilla del nonograma;
+# el literal es positivo sii la casilla esta rellenada.
+
+# Formato de la entrada: - las letras proposionales seran: 1, ..., 25;
+#                        - solo se aceptan literales (ej. 1, ~2, 3, ~4, etc.)
+# Requiere también un número natural, para servir de índice del nonograma,
+# toda vez que pueden solicitarse varios nonogramas.
+
+# Salida: archivo tablero_%i.png, donde %i es un número natural
+
+#################
+# importando paquetes para dibujar
+print("Importando paquetes...")
+import matplotlib
+
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.offsetbox import AnnotationBbox, OffsetImage
+
+print("Listo!")
+
+
+def dibujar_tablero(f, numero):
+    # Visualiza un nonograma dada una formula f y los conjuntos de numeros que definen el nonograma
+    # Input:
+    #   - f, una lista de literales
+    #   - n, un numero de identificacion del archivo
+    # Output:
+    #   - archivo de imagen nonograma_n.png
+
+    # Inicializo el plano que contiene la figura
+    fig, axes = plt.subplots()
+    axes.get_xaxis().set_visible(False)
+    axes.get_yaxis().set_visible(False)
+
+    # Dibujo el nonograma
+    step = 1. / 8
+    tangulos = []
+    # Creo los cuadrados oscuros en el tablero
+    for i in range(8):
+        tangulos.append(patches.Rectangle(*[(2 * step, i * step), step, step], \
+                                          facecolor='lightslategrey'))
+        tangulos.append(patches.Rectangle(*[(1 * step, i * step), step, step], \
+                                          facecolor='lightslategrey'))
+        tangulos.append(patches.Rectangle(*[(0 * step, i * step), step, step], \
+                                          facecolor='lightslategrey'))
+        tangulos.append(patches.Rectangle(*[(i * step, 5 * step), step, step], \
+                                          facecolor='lightslategrey'))
+        tangulos.append(patches.Rectangle(*[(i * step, 7 * step), step, step], \
+                                          facecolor='lightslategrey'))
+        tangulos.append(patches.Rectangle(*[(i * step, 6 * step), step, step], \
+                                          facecolor='lightslategrey'))
+
+    # coloreo la esquina izquierda
+    for i in range(3):
+        for x in range(5, 8):
+            tangulos.append(patches.Rectangle(*[(i * step, x * step), step, step], \
+                                              facecolor='black'))
+
+    # Creo las líneas del tablero
+    for j in range(7):
+        locacion = j * step
+        # Crea linea horizontal en el rectangulo
+        tangulos.append(patches.Rectangle(*[(0, step + locacion), 1, 0.005], \
+                                          facecolor='black'))
+        # Crea linea vertical en el rectangulo
+        tangulos.append(patches.Rectangle(*[(step + locacion, 0), 0.005, 1], \
+                                          facecolor='black'))
+
+    for t in tangulos:
+        axes.add_patch(t)
+
+    # Cargando imagen de relleno color naranja
+    arr_img = plt.imread("naranja.jpg", format='jpg')
+    imagebox = OffsetImage(arr_img, zoom=0.043)
+    imagebox.image.axes = axes
+
+    arr_imgP = plt.imread("p.png", format='png')
+    imageboxP = OffsetImage(arr_imgP, zoom=0.25)
+
+    # Creando las direcciones en la imagen de acuerdo a literal
+
+    #Direcciones de las casillas rellenadas
+    direcciones = {}
+    direcciones[1] = [7 * 0.0625, 9 * 0.0625]
+    direcciones[2] = [9 * 0.0625, 9 * 0.0625]
+    direcciones[3] = [11 * 0.0625, 9 * 0.0625]
+    direcciones[4] = [13 * 0.0625, 9 * 0.0625]
+    direcciones[5] = [15 * 0.0625, 9 * 0.0625]
+    direcciones[6] = [7 * 0.0625, 7 * 0.0625]
+    direcciones[7] = [9 * 0.0625, 7 * 0.0625]
+    direcciones[8] = [11 * 0.0625, 7 * 0.0625]
+    direcciones[9] = [13 * 0.0625, 7 * 0.0625]
+    direcciones[10] = [15 * 0.0625, 7 * 0.0625]
+    direcciones[11] = [7 * 0.0625, 5 * 0.0625]
+    direcciones[12] = [9 * 0.0625, 5 * 0.0625]
+    direcciones[13] = [11 * 0.0625, 5 * 0.0625]
+    direcciones[14] = [13 * 0.0625, 5 * 0.0625]
+    direcciones[15] = [15 * 0.0625, 5 * 0.0625]
+    direcciones[16] = [7 * 0.0625, 3 * 0.0625]
+    direcciones[17] = [9 * 0.0625, 3 * 0.0625]
+    direcciones[18] = [11 * 0.0625, 3 * 0.0625]
+    direcciones[19] = [13 * 0.0625, 3 * 0.0625]
+    direcciones[20] = [15 * 0.0625, 3 * 0.0625]
+    direcciones[21] = [7 * 0.0625, 1 * 0.0625]
+    direcciones[22] = [9 * 0.0625, 1 * 0.0625]
+    direcciones[23] = [11 * 0.0625, 1 * 0.0625]
+    direcciones[24] = [13 * 0.0625, 1 * 0.0625]
+    direcciones[25] = [15 * 0.0625, 1 * 0.0625]
+    #direccion de p
+    direcciones[26] = [3 * 0.0625, 13 * 0.0625]
+
+    #Direcciones de los numeros ubicados en las casillas p
+    countx = 0
+    for h in range(1, 6):
+        for m in range(3):
+            direcciones[27 + countx] = [((5 + 2 * h) * 0.0625), ((15 - 2 * m) * 0.0625)]
+            countx += 1
+
+    county = 0
+    for g in range(6, 11):
+        for n in range(3):
+            direcciones[42 + county] = [((1 + 2 * n) * 0.0625), ((11 - (g - 5) * 2) * 0.0625)]
+            county += 1
+
+    #cargando imagenes de los numeros
+    num_img1 = plt.imread("1.png", format='png')
+    imagebox1 = OffsetImage(num_img1, zoom=0.19)
+
+    num_img2 = plt.imread("2.png", format='png')
+    imagebox2 = OffsetImage(num_img2, zoom=0.19)
+
+    num_img3 = plt.imread("3.png", format='png')
+    imagebox3 = OffsetImage(num_img3, zoom=0.19)
+
+    num_img4 = plt.imread("4.png", format='png')
+    imagebox4 = OffsetImage(num_img4, zoom=0.19)
+
+    num_img5 = plt.imread("5.png", format='png')
+    imagebox5 = OffsetImage(num_img5, zoom=0.19)
+
+    abP = AnnotationBbox(imageboxP, direcciones[26], frameon=False)
+    axes.add_artist(abP)
+
+    #ubicando las imagenes de los numeros con respecto a las letras proposicionales en p
+    for l in range(1, 26):
+        if f[l] != 0:
+            ab = AnnotationBbox(imagebox, direcciones[int(l)], frameon=False)
+            axes.add_artist(ab)
+
+    for m in range(1, 31):
+        if f["c" + str(m)] != 0:
+            abb2 = AnnotationBbox(imagebox1, direcciones[int(26 + m)], frameon=False)
+            axes.add_artist(abb2)
+
+    for n in range(1, 31):
+        if f["d" + str(n)] != 0:
+            abb3 = AnnotationBbox(imagebox2, direcciones[int(26 + m)], frameon=False)
+            axes.add_artist(abb3)
+
+    for o in range(1, 31):
+        if f["e" + str(o)] != 0:
+            abb4 = AnnotationBbox(imagebox3, direcciones[int(26 + m)], frameon=False)
+            axes.add_artist(abb4)
+
+    for p in range(1, 31):
+        if f["f" + str(p)] != 0:
+            abb5 = AnnotationBbox(imagebox4, direcciones[int(26 + m)], frameon=False)
+            axes.add_artist(abb5)
+
+    for q in range(1, 31):
+        if f["g" + str(q)] != 0:
+            abb = AnnotationBbox(imagebox5, direcciones[int(26 + m)], frameon=False)
+            axes.add_artist(abb)
+
+    fig.savefig("nonograma_" + str(numero) + ".png")
+
+#f es la formula, los numeros de 1 a 25 representan las casillas rellenadas, las b representan las casillas P con el numero 0, es decir, vacias
+#la letra c representa el 1, la d el 2, la e el 3, la f el 4 y la g el 5, ubicadas dependiendo de su numero en una posicion de las casillas P
+f = {1: 1, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0, 7: 1, 8: 0, 9: 1, 10: 1, 11: 1, 12: 0, 13: 0, 14: 1, 15: 0, 16: 0, 17: 1,
+     18: 1, 19: 1, 20: 1, 21: 1, 22: 0, 23: 0, 24: 0, 25: 1, "b1": 0, "b2": 0, "b3": 0, "b4": 0, "b5": 0, "b6": 0,
+     "b7": 0, "b8": 0, "b9": 0, "b10": 0, "b11": 0, "b12": 0, "b13": 0, "b14": 0, "b15": 0, "b16": 0, "b17": 0,
+     "b18": 0, "b19": 0, "b20": 0, "b21": 0, "b22": 0, "b23": 0, "b24": 0, "b25": 0, "b26": 0, "b27": 0, "b28": 0,
+     "b29": 0, "b30": 0, "c1": 1, "c2": 1, "c3": 1, "c4": 1, "c5": 1, "c6": 1, "c7": 0, "c8": 0, "c9": 0, "c10": 0,
+     "c11": 0, "c12": 0, "c13": 0, "c14": 0, "c15": 0, "c16": 0, "c17": 0, "c18": 0, "c19": 0, "c20": 0, "c21": 0,
+     "c22": 0, "c23": 0, "c24": 0, "c25": 0, "c26": 0, "c27": 0, "c28": 0, "c29": 0, "c30": 0, "d1": 0, "d2": 0,
+     "d3": 0, "d4": 0, "d5": 0, "d6": 0, "d7": 0, "d8": 0, "d9": 0, "d10": 0, "d11": 0, "d12": 0, "d13": 0, "d14": 0,
+     "d15": 0, "d16": 0, "d17": 0, "d18": 0, "d19": 0, "d20": 0, "d21": 0, "d22": 0, "d23": 0, "d24": 0, "d25": 0,
+     "d26": 0, "d27": 0, "d28": 0, "d29": 0, "d30": 0, "e1": 0, "e2": 0, "e3": 0, "e4": 0, "e5": 0, "e6": 0, "e7": 0,
+     "e8": 0, "e9": 0, "e10": 0, "e11": 0, "e12": 0, "e13": 0, "e14": 0, "e15": 0, "e16": 0, "e17": 0, "e18": 0,
+     "e19": 0, "e20": 0, "e21": 0, "e22": 0, "e23": 0, "e24": 0, "e25": 0, "e26": 0, "e27": 0, "e28": 0, "e29": 0,
+     "e30": 0, "f1": 0, "f2": 0, "f3": 0, "f4": 0, "f5": 0, "f6": 0, "f7": 0, "f8": 0, "f9": 0, "f10": 0, "f11": 0,
+     "f12": 0, "f13": 0, "f14": 0, "f15": 0, "f16": 0, "f17": 0, "f18": 0, "f19": 0, "f20": 0, "f21": 0, "f22": 0,
+     "f23": 0, "f24": 0, "f25": 0, "f26": 0, "f27": 0, "f28": 0, "f29": 0, "f30": 0, "g1": 0, "g2": 0, "g3": 0, "g4": 0,
+     "g5": 0, "g6": 0, "g7": 0, "g8": 0, "g9": 0, "g10": 0, "g11": 0, "g12": 0, "g13": 0, "g14": 0, "g15": 0, "g16": 0,
+     "g17": 0, "g18": 0, "g19": 0, "g20": 0, "g21": 0, "g22": 0, "g23": 0, "g24": 0, "g25": 0, "g26": 0, "g27": 0,
+     "g28": 0, "g29": 0, "g30": 0}
+
+dibujar_tablero(f, 121)
