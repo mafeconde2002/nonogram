@@ -1,9 +1,9 @@
-# Visualizacion de nonograma 5x5 a partir de
+# Visualizacion de nonograma 3x3 a partir de
 # una lista de literales. Cada literal representa una casilla del nonograma;
 # el literal es positivo sii la casilla esta rellenada.
 
-# Formato de la entrada: - las letras proposionales seran: 1, ..., 25;
-#                        - solo se aceptan literales (ej. 1, ~2, 3, ~4, etc.)
+# Formato de la entrada: - las letras proposionales seran: chr(65, ..., 116);
+#                        - solo se aceptan literales (ej. A, ~B, C, ~D, etc.)
 # Requiere también un número natural, para servir de índice del nonograma,
 # toda vez que pueden solicitarse varios nonogramas.
 
@@ -148,7 +148,7 @@ def dibujar_tablero(f, numero):
             axes.add_artist(abb4)
 
     fig.savefig("nonograma_" + str(numero) + ".png")
-
-f={'A': 1, 'B': 1, 'C': 1, 'D': 1, 'E': 1, 'F': 1, 'G':1, 'H': 1, 'I': 1, 'J': 1, 'K':0, 'L': 1, 'M': 1, 'N': 1, 'O': 0, 'P': 1, 'Q': 1, 'R': 0, 'S': 0, 'T':0, 'U': 0, 'V': 0, 'W': 1, 'X': 1, 'Y': 0, 'Z': 1, 'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 1, 'r': 0, 's': 1, 't': 0, 'u': 1, 'v': 1, 'w': 1,'à': 0, 'á': 1, 'â': 0, 'ã': 0, 'ä': 0, 'å': 0, 'æ': 0, 'ç': 0}
+print("")
+f={'A': 1, 'B': 0, 'C': 1, 'D': 0, 'E': 1, 'F': 0, 'G':1, 'H': 0, 'I': 1, 'J': 1, 'K':1, 'L': 1, 'M': 0, 'N': 1, 'O': 1, 'P': 1, 'Q': 1, 'R': 0, 'S': 1, 'T':1, 'U': 1, 'V': 0, 'W': 0, 'X': 0, 'Y': 0, 'Z': 0, 'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 1, 'v': 1, 'w': 1,'à': 0, 'á': 1, 'â': 0, 'ã': 0, 'ä': 0, 'å': 0, 'æ': 0, 'ç': 0}
 print(len(f))
 dibujar_tablero(f, 121)
