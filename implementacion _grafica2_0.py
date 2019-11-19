@@ -103,7 +103,6 @@ def dibujar_tablero(f, numero):
     county = 0
     for g in range(1, 4):
         for n in range(2):
-            print(7+county,"direccion    ",1+3*n,"     ",11-(g-5)*3)
             direcciones[7 + county] = [((1+ 3.1 * n) * 0.067), ((11 - (g ) * 3) * 0.0625)]
             county += 1
 
@@ -128,7 +127,6 @@ def dibujar_tablero(f, numero):
 
     for m in range(1, 13):
         if f[chr(m+73)] != 0:
-            print(chr(m+73))
             abb2 = AnnotationBbox(imagebox1, direcciones[int(m)], frameon=False)
             axes.add_artist(abb2)
 
@@ -148,7 +146,7 @@ def dibujar_tablero(f, numero):
             axes.add_artist(abb4)
 
     fig.savefig("nonograma_" + str(numero) + ".png")
-print("")
+
 f={'A': 1, 'B': 0, 'C': 1, 'D': 0, 'E': 1, 'F': 0, 'G':1, 'H': 0, 'I': 1, 'J': 1, 'K':1, 'L': 1, 'M': 0, 'N': 1, 'O': 1, 'P': 1, 'Q': 1, 'R': 0, 'S': 1, 'T':1, 'U': 1, 'V': 0, 'W': 0, 'X': 0, 'Y': 0, 'Z': 0, 'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 1, 'v': 1, 'w': 1,'à': 0, 'á': 1, 'â': 0, 'ã': 0, 'ä': 0, 'å': 0, 'æ': 0, 'ç': 0}
-print(len(f))
+print(f.keys())
 dibujar_tablero(f, 121)
