@@ -8,12 +8,12 @@ def case_0(letras):
 
 #Los numeros en P(i) suman 1
 def case_1(letras):
-    regla = "((({0}^~{1}^~{2})0(~{0}^{1}^~{2}))0(~{0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
+    regla = "((({0}^~{1}^~{2})°(~{0}^{1}^~{2}))°(~{0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
     return regla
 
 #Los numeros en P(i) suman 2
 def case_2(letras):
-    regla = "(({0}^{1}^~{2})0(~{0}^{1}^{2})0({0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
+    regla = "(({0}^{1}^~{2})°(~{0}^{1}^{2})°({0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
     return regla
         
 #Los numeros en P(i) suman 3
@@ -23,12 +23,12 @@ def case_3(letras):
 
 #Hay una casila rellenada en p(i) con el 1
 def case_4(letras):
-    regla = "((({0}^~{1}^~{2})0(~{0}^{1}^~{2}))0(~{0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
+    regla = "((({0}^~{1}^~{2})°(~{0}^{1}^~{2}))°(~{0}^~{1}^{2}))".format(letras[0],letras[1],letras[2])
     return regla
 
 #Hay una casila rellenada en p(i) con el 2
 def case_5(letras):
-    regla = "(({0}^{1}^~{2})0(~{0}^{1}^{2}))".format(letras[0],letras[1],letras[2])
+    regla = "(({0}^{1}^~{2})°(~{0}^{1}^{2}))".format(letras[0],letras[1],letras[2])
     return regla
         
 #Hay dos casilas rellenadas en p(i)
@@ -42,30 +42,30 @@ def case_7(letras):
     return regla
 
 def case_p(letras):
-    regla = "(((({0}^~{1}^~{2}^~{3})0(~{0}^~{1}^~{2}^{3}))0(~{0}^~{1}^{2}^~{3}))0(~{0}^{1}^~{2}^~{3}))".format(letras[0],letras[1],letras[2],letras[3])
+    regla = "(((({0}^~{1}^~{2}^~{3})°(~{0}^~{1}^~{2}^{3}))°(~{0}^~{1}^{2}^~{3}))°(~{0}^{1}^~{2}^~{3}))".format(letras[0],letras[1],letras[2],letras[3])
     return regla
 
 #regla 1
-r1 = "(((i^t)0(h^u))^"+case_3(["A","D","G"])+")"
-r2 = "(((j^w)0(v^k))^"+case_3(["B","E","H"])+")"
-r3 = "(((l^á)0(à^m))^"+case_3(["C","F","I"])+")"
-r4 = "(((n^ã)0(â^o))^"+case_3(["A","B","C"])+")"
-r5 = "(((p^å)0(ä^q))^"+case_3(["D","E","F"])+")"
-r6 = "(((r^ç)0(æ^s))^"+case_3(["G","H","I"])+")"
+r1 = "(((i^t)°(h^u))^"+case_3(["A","D","G"])+")"
+r2 = "(((j^w)°(v^k))^"+case_3(["B","E","H"])+")"
+r3 = "(((l^á)°(à^m))^"+case_3(["C","F","I"])+")"
+r4 = "(((n^ã)°(â^o))^"+case_3(["A","B","C"])+")"
+r5 = "(((p^å)°(ä^q))^"+case_3(["D","E","F"])+")"
+r6 = "(((r^ç)°(æ^s))^"+case_3(["G","H","I"])+")"
 
-r7 = "((((J^K)0(V^U))0(t^W))^"+case_2(["A","D","G"]) +")"
-r8 = "((((L^M)0(X^W))0(v^Y))^"+case_2(["B","E","H"])+")"
-r9 = "((((N^O)0(Z^á))0(à^a))^"+case_2(["C","F","I"])+")"
-r10 = "((((P^Q)0(b^ã))0(â^c))^"+case_2(["A","B","C"])+")"
-r11 = "((((R^S)0(d^å))0(ä^e))^"+case_2(["D","E","F"])+")"
-r12 = "((((T^U)0(F^ç))0(æ^g))^"+case_2(["G","H","I"])+")"
+r7 = "((((J^K)°(V^U))°(t^W))^"+case_2(["A","D","G"]) +")"
+r8 = "((((L^M)°(X^W))°(v^Y))^"+case_2(["B","E","H"])+")"
+r9 = "((((N^O)°(Z^á))°(à^a))^"+case_2(["C","F","I"])+")"
+r10 = "((((P^Q)°(b^ã))°(â^c))^"+case_2(["A","B","C"])+")"
+r11 = "((((R^S)°(d^å))°(ä^e))^"+case_2(["D","E","F"])+")"
+r12 = "((((T^U)°(F^ç))°(æ^g))^"+case_2(["G","H","I"])+")"
 
-r13 = "((((v^t)0(v^J))0(t^k))^"+case_1(["A","D","G"])+")"
-r14 = "((((w^v)0(w^L))0(v^M))^"+case_1(["B","E","H"])+")"
-r15 = "((((á^à)0(á^N))0(à^O))^"+case_1(["C","F","I"])+")"
-r16 = "((((â^ã)0(â^Q))0(P^ã))^"+case_1(["A","B","C"])+")"
-r17 = "((((ä^å)0(ä^S))0(R^å))^"+case_1(["D","E","F"])+")"
-r18 = "((((æ^f)0(æ^U))0(T^ç))^"+case_1(["G","H","I"])+")"
+r13 = "((((v^t)°(v^J))°(t^k))^"+case_1(["A","D","G"])+")"
+r14 = "((((w^v)°(w^L))°(v^M))^"+case_1(["B","E","H"])+")"
+r15 = "((((á^à)°(á^N))°(à^O))^"+case_1(["C","F","I"])+")"
+r16 = "((((â^ã)°(â^Q))°(P^ã))^"+case_1(["A","B","C"])+")"
+r17 = "((((ä^å)°(ä^S))°(R^å))^"+case_1(["D","E","F"])+")"
+r18 = "((((æ^f)°(æ^U))°(T^ç))^"+case_1(["G","H","I"])+")"
 
 r19 = "((u^t)^"+case_0(["A","D","G"])+")"
 r20 = "((v^w)^"+case_0(["B","E","H"])+")"
@@ -91,7 +91,7 @@ p10= case_p(["e","S","q","å"])
 p11= case_p(["f","r","T","æ"])
 p12= case_p(["g","s","U","ç"])
 
-regla_p=p1+"^"+p2+"^"+p3+"^"+p4+"^"+p5+"^"+p6+"^"+p7+"^"+p8+"^"+p9+"^"+p10+"^"+p11+"^"+p12+"^"
+regla_p="((((((((((("+p1+"^"+p2+")"+"^"+p3+")"+"^"+p4+")"+"^"+p5+")"+"^"+p6+")"+"^"+p7+")"+"^"+p8+")"+"^"+p9+")"+"^"+p10+")"+"^"+p11+")"+"^"+p12+")"
 #{'à': 0, 'á': 0, 'â': 0, 'ã': 0, 'ä': 0, 'å': 0, 'æ': 0, 'ç': 0, 'è': 0}
 dic = {}
 for i in range(224,233):
@@ -99,36 +99,53 @@ for i in range(224,233):
     
 letrasProp = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç']
 
-cadenita=arboles.Inorder(arboles.StringtoTree(regla_1,letrasProp))
+m=arboles.StringtoTree(regla_1,letrasProp)
+print(m)
+#cadenita=arboles.Inorder(m)
+#
+#print(cadenita)
 
-print(cadenita)
+def polaca(a):
+    p1 = ""
+    p1 += a.label
+    if a.right != None and a.left != None:
+        p1 += polaca(a.left)
+        p1 += polaca(a.right)
+    elif a.right != None and a.left == None:
+        p1 += polaca(a.right)
+    return p1
+
+def inversa(a):
+    x3 = polaca(a)
+    return x3[::-1]
+
 def enFNC(A):
     assert(len(A)==4 or len(A)==7), u"Fórmula incorrecta!"
     B = ''
     p = A[0]
     # print('p', p)
-    if "-" in A:
+    if "~" in A:
         q = A[-1]
         # print('q', q)
-        B = "-"+p+"O-"+q+"Y"+p+"O"+q
-    elif "Y" in A:
+        B = "~"+p+"°~"+q+"^"+p+"°"+q
+    elif "^" in A:
         q = A[3]
         # print('q', q)
         r = A[5]
         # print('r', r)
-        B = q+"O-"+p+"Y"+r+"O-"+p+"Y-"+q+"O-"+r+"O"+p
-    elif "O" in A:
+        B = q+"°~"+p+"^"+r+"°~"+p+"^~"+q+"°~"+r+"°"+p
+    elif "°" in A:
         q = A[3]
         # print('q', q)
         r = A[5]
         # print('r', r)
-        B = q+"O"+p+"Y-"+r+"O"+p+"Y"+q+"O"+r+"O-"+p
+        B = q+"O°"+p+"^~"+r+"°"+p+"^"+q+"°"+r+"°~"+p
     elif ">" in A:
         q = A[3]
         # print('q', q)
         r = A[5]
         # print('r', r)
-        B = q+"O"+p+"Y-"+r+"O"+p+"Y-"+q+"O"+r+"O-"+p
+        B = q+"°"+p+"^~"+r+"°"+p+"^~"+q+"°"+r+"°~"+p
     else:
         print(u'Error enENC(): Fórmula incorrecta!')
 
@@ -145,12 +162,12 @@ def Tseitin(A, letrasProposicionalesA):
     I = -1
     S = A[0]
     while len(A) > 0:
-        if (S in letrasProposicionalesA) and (Pila[-1] == "-"):
+        if (S in letrasProposicionalesA) and (Pila[-1] == "~"):
             I += 1
             Atomo = letrasProposicionalesB[I]
             Pila = Pila[:-1]
             Pila.append(Atomo)
-            L.append(Atomo+"="+"-"+S)
+            L.append(Atomo+"="+"~"+S)
             A = A[1:]
             S = A[0]
             if len(A) > 0:
@@ -177,7 +194,7 @@ def Tseitin(A, letrasProposicionalesA):
 
     for X in L:
         Y = enFNC(X)
-        B += "Y"+Y
+        B += "^"+Y
 
     B = Atomo + B
 
@@ -191,9 +208,9 @@ def Clausula(C):
     L=[]
     while len(C)>0:
         s=C[0]
-        if s=="Y" or s=="O":
+        if s=="^" or s=="°":
             C=C[1:]
-        elif s=="-":
+        elif s=="~":
             literal=s+C[1]
             L.append(literal)
             C=C[2:]
@@ -213,7 +230,7 @@ def formaClausal(A):
             L.append(Clausula(A))
             A=''
         else:
-            if A[i]=="Y":
+            if A[i]=="^":
                 L.append(Clausula(A[:i]))
                 A=A[i+1:]
                 i=0
@@ -225,13 +242,13 @@ def clausulas(formula):
     clausulasFinales=[]
     tmp=[]
     string=""
-    idx=formula.find("*")
+    idx=formula.find("^")
     clausulasFinales.append([formula[1:idx]])
     for i in formula[idx+1:]:
         if(i=="+"):
             tmp.append(string)
             string=""
-        elif(i=="*" or i=="]"):
+        elif(i=="^" or i=="]"):
             tmp.append(string)
             clausulasFinales.append(tmp)
             string=""
@@ -261,7 +278,7 @@ def unitPropagate(lista,interps):
             interps[str(x)]=1
             j = 0
             for i in range(0,len(lista)):
-                lista[i]=re.sub('-'+x,'',lista[i])
+                lista[i]=re.sub('~'+x,'',lista[i])
             for i in range(0,len(lista)):
                 if(x in lista[i-j]):
                     lista.remove(lista[i-j])
@@ -279,28 +296,24 @@ def unitPropagate(lista,interps):
     return(lista, interps)
 
 def literal_complemento(lit):
-    if lit[0] == "-":
+    if lit[0] == "~":
         return lit[1]
     else:
-        lit = "-" + lit
+        lit = "~" + lit
         return lit
 
 def DPLL(lista, interps):
     lista, interps = unitPropagate(lista,interps)
     if(len(lista)==0):
-        listaFinal = lista
-        interpsFinal = interps
         return(lista,interps)
     elif("" in lista):
-        listaFinal = lista
-        interpsFinal = interps
         return (lista,{})
     else:
         listaTemp = [x for x in lista]
         for l in listaTemp[0]:
             if (len(listaTemp)==0):
                 return (listaTemp, interps)
-            if (l not in interps.keys() and l!='-'):
+            if (l not in interps.keys() and l!='~'):
                 break
         listaTemp.insert(0,l)
         lista2, inter2 = DPLL(listaTemp, interps)
