@@ -14,6 +14,7 @@
 print("Importando paquetes...")
 import matplotlib
 import reglas
+import arboles
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -148,11 +149,16 @@ def dibujar_tablero(f, numero):
     fig.savefig("nonograma_" + str(numero) + ".png")
 
 letrasProp = ["A","B","C","D","E","F","G","H","I"]
-condiciones = [[1,1],[0,0],[1,1],[1,1],[0,0],[1,1]]
+letrasProp2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç']
+condiciones = [[1,1],[2,0],[1,1],[1,1],[0,0],[1,1]]
+
+print(condiciones)
 cuadros = [["A","B","C"],["D","E","F"],["G","H","I"],["A","D","G"],["B","E","H"],["C","F","I"]]
 f={'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0, 'G': 0, 'H': 0, 'I': 0, 'J': 0, 'K': 0, 'L': 0, 'M': 0, 'N': 0, 'O': 0, 'P': 0, 'Q': 0, 'R': 0, 'S': 0, 'T': 0, 'U': 0, 'V': 0, 'W': 0, 'X': 0, 'Y': 0, 'Z': 0, 'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'à': 0, 'á': 0, 'â': 0, 'ã': 0, 'ä': 0, 'å': 0, 'æ': 0, 'ç': 0}
-#f2 = {"K":1, "J":1, "M":1, "v":1, "O":1, "N":1, "P":1, "Q":1, "S":1, "U":1, "T":1}
-reglas.numero(condiciones,f)
-reglas.main(condiciones,cuadros,f,letrasProp)
+je="^"+reglas.regla_tot+reglas.numero(condiciones,f)
+#arboles.StringtoTree(reglas.inversa(reglas.numero(condiciones,f)),)
+print(arboles.Inorder(arboles.StringtoTree(reglas.inversa(je),letrasProp2)))
+#print(arboles.Inorder(ar))
+algo=reglas.main(f,letrasProp2,je)
 
-dibujar_tablero(f, 11)
+dibujar_tablero(algo, 11)
