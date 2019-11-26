@@ -6,11 +6,11 @@ def case_0(letras):
     return regla
 #Los numeros en P(i) suman 1
 def case_1(letras):
-    regla = "°°^^{0}~{1}~{2}^^~{0}{1}~{2}^^~{0}~{1}{2}".format(letras[0],letras[1],letras[2])
+    regla = "°°^^^^{0}~{1}~{2}°°{0}~{1}{2}°°{0}{1}~{2}^^^^~{0}{1}~{2}°°~{0}{1}{2}°°~{0}{1}~{2}^^^^~{0}~{1}{2}°°~{0}{1}{2}°°{0}~{1}{2}".format(letras[0],letras[1],letras[2])
     return regla
 #Los numeros en P(i) suman 2
 def case_2(letras):
-    regla = "°°^^{0}{1}~{2}^^~{0}{1}{2}^^{0}~{1}{2}".format(letras[0],letras[1],letras[2]) 
+    regla = "°°^^^^{0}{1}~{2}°°{0}~{1}~{2}°°~{0}{1}~{2}^^^^~{0}{1}{2}°°~{0}~{1}{2}°°~{0}{1}~{2}^^^^{0}~{1}{2}°°~{0}~{1}{2}°°{0}~{1}~{2}".format(letras[0],letras[1],letras[2]) 
     return regla
         
 #Los numeros en P(i) suman 3
@@ -19,11 +19,11 @@ def case_3(letras):
     return regla
 #Hay una casila rellenada en p(i) con el 1
 def case_4(letras):
-    regla = "°°^^{0}~{1}~{2}^^~{0}{1}~{2}^^~{0}~{1}{2}".format(letras[0],letras[1],letras[2]) 
+    regla = "°°^^^^{0}~{1}~{2}°°{0}~{1}{2}°°{0}{1}~{2}^^^^~{0}{1}~{2}°°~{0}{1}{2}°°{0}{1}~{2}^^^^~{0}~{1}{2}°°~{0}{1}{2}°°{0}~{1}{2}".format(letras[0],letras[1],letras[2]) 
     return regla
 #Hay una casila rellenada en p(i) con el 2
 def case_5(letras):
-    regla = "°^^{0}{1}~{2}^^~{0}{1}{2}".format(letras[0],letras[1],letras[2]) 
+    regla = "°^^^{0}{1}~{2}°°{0}~{1}~{2}^^^~{0}{1}{2}°°~{0}~{1}{2}".format(letras[0],letras[1],letras[2]) 
     return regla
         
 #Hay dos casilas rellenadas en p(i)
@@ -47,14 +47,19 @@ def CondInicial(c,l):
         elif (c[0] == 1 and c[1] == 1):
             return case_6([l[0],l[1],l[2]])
         elif (c[0] == 2 and c[1] == 0) or (c[0] == 0 and c[1] == 2):
-            return case_2([l[0],l[1],l[2]])
+            return case_5([l[0],l[1],l[2]])
         elif (c[0] == 3 and c[1] == 0) or (c[0] == 0 and c[1] == 3):
             return case_3([l[0],l[1],l[2]])
 
 def makeRule(c,d):
     rule = "^^^^^"
-    for i in range(len(c)):
-        rule = rule+CondInicial(c[i],d[i])
+    rule6=CondInicial(c[0],d[0])
+    rule1=CondInicial(c[1],d[1])
+    rule2=CondInicial(c[2],d[2])
+    rule3=CondInicial(c[3],d[3])
+    rule4=CondInicial(c[4],d[4])
+    rule5=CondInicial(c[5],d[5])
+    rule = rule+rule1+rule2+rule3+rule4+rule5+rule6
     return rule
 
 def polaca(a):
@@ -172,12 +177,13 @@ r2_23 = "^^äå"+case_7(["D","E","F"])
 r2_24 = "^^æç"+case_7(["G","H","I"])
 
 regla_2 = "^^^^^^^^^^^^^^^^^^^^^^^"+r2_1+r2_2+r2_3+r2_4+r2_5+r2_6+r2_7+r2_8+r2_9+r2_10+r2_11+r2_12+r2_13+r2_14+r2_15+r2_16+r2_17+r2_18+r2_19+r2_20+r2_21+r2_22+r2_23+r2_24
-regla_tot ="^^"+regla_1+regla_p+regla_2
+regla_tot ="^"+regla_p+regla_2
 
 
 # Algoritmo de transformacion de Tseitin
 # Input: A (cadena) en notacion inorder
 # Output: B (cadena), Tseitin
+
 def Tseitin(A, letrasProposicionalesA):
     letrasProposicionalesB = [chr(x) for x in range(256, 3000)]
     assert(not bool(set(letrasProposicionalesA) & set(letrasProposicionalesB))), u"¡Hay letras proposicionales en común!"
@@ -342,6 +348,55 @@ def literal_complemento(lit):
     else:
         lit = "~" + lit
         return lit
+    
+
+def neg(a):
+    if len(a) == 1:
+        l = "~" + a
+    else:
+        l = a[-1]
+    return l
+
+#def DPLL(s, i):
+#    void = []
+#    s, i = unitPropagate(s,i)
+#    if void in s:
+#        return "Insatisfacible", {}
+#    elif len(s) == 0:
+#        return "Satisfacible", i
+#    l = ""
+#    for y in s:
+#        for x in y:
+#            if x not in i.keys():
+#                l = x
+#    l_comp = neg(l)
+#    if l == "":
+#        return None
+#    Sp = copy.deepcopy(s)
+#    Sp = [n for n in Sp if l not in n]
+#    for q in Sp:
+#        if l_comp in q:
+#            q.remove(neg(l))
+#    Ip = copy.deepcopy(i)
+#    if l[0] == "~":
+#        Ip[l[1]] = 0
+#    else:
+#        Ip[l] = 1
+#    S1, I1 = DPLL(Sp, Ip)
+#    if S1 == "Satisfacible":
+#        return S1, I1
+#    else:
+#        Spp = copy.deepcopy(s)
+#        Spp = [q for q in Spp if neg(l) not in q]
+#        for h in Spp:
+#            if l in h:
+#                h.remove(l)
+#        Ipp = copy.deepcopy(i)
+#        if l[0] == "~":
+#            Ipp[l[1]] = 0
+#        else:
+#            Ipp[l] = 1
+#        return DPLL(Spp, Ipp)
 
 def DPLL(lista, interps):
     lista, interps = unitPropagate(lista,interps)
@@ -365,10 +420,6 @@ def DPLL(lista, interps):
             lista2, inter2 = DPLL(listaTemp, interps)
         return lista2, inter2
 
-
-def DPLLResultado(lista):
-    lista, inter = DPLL(lista,{})
-    return inter
 
 def numero(c,dict):
     reglaa="^^^^^"
